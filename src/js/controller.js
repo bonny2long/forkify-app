@@ -29,6 +29,10 @@ const controlRecipes = async () => {
   }
 };
 
+const welcomeMessage = () => {
+  console.log('Welcome to the Forkify App!');
+};
+
 // === Search Results Control ===
 const controlSearchResults = async () => {
   try {
@@ -106,6 +110,7 @@ const init = () => {
   searchView.addHandlerSearch(controlSearchResults);
   paginationView.addHandlerClick(controlPagination);
   addRecipeView.addHandlerUpload(controlAddRecipe);
+  welcomeMessage();
 };
 
 init();
