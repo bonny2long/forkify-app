@@ -1,9 +1,9 @@
 import View from './View.js';
-import icons from 'url:../../img/icons.svg';
+import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class AddRecipeView extends View {
   _parentElement = document.querySelector('.upload');
-  _message = 'Look at you making recipes and shit :)';
+  _message = 'Recipe was successfully uploaded :)';
 
   _window = document.querySelector('.add-recipe-window');
   _overlay = document.querySelector('.overlay');
@@ -12,42 +12,34 @@ class AddRecipeView extends View {
 
   constructor() {
     super();
-    this._initModalToggleHandlers();
+    this._addHandlerShowWindow();
+    this._addHandlerHideWindow();
   }
 
-  /**
-   * Toggles visibility of the add recipe modal window
-   */
   toggleWindow() {
     this._overlay.classList.toggle('hidden');
     this._window.classList.toggle('hidden');
   }
 
-  /**
-   * Sets up event listeners for showing and hiding the modal
-   */
-  _initModalToggleHandlers() {
+  _addHandlerShowWindow() {
     this._btnOpen.addEventListener('click', this.toggleWindow.bind(this));
+  }
+
+  _addHandlerHideWindow() {
     this._btnClose.addEventListener('click', this.toggleWindow.bind(this));
     this._overlay.addEventListener('click', this.toggleWindow.bind(this));
   }
 
-  /**
-   * Accepts a handler function to be called on form submission
-   * Converts form data to an object and passes it to the handler
-   */
   addHandlerUpload(handler) {
     this._parentElement.addEventListener('submit', function (e) {
       e.preventDefault();
-      const formData = new FormData(this);
-      const data = Object.fromEntries([...formData]);
+      const dataArr = [...new FormData(this)];
+      const data = Object.fromEntries(dataArr);
       handler(data);
     });
   }
 
-  _generateMarkup() {
-    // Intentionally left blank (not used for this view)
-  }
+  _generateMarkup() {}
 }
 
 export default new AddRecipeView();

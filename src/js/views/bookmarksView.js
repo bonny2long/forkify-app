@@ -1,24 +1,16 @@
 import View from './View.js';
 import previewView from './previewView.js';
-import icons from 'url:../../img/icons.svg';
+import icons from 'url:../../img/icons.svg'; // Parcel 2
 
 class BookmarksView extends View {
   _parentElement = document.querySelector('.bookmarks__list');
-  _errorMessage = 'Save some of your favorite recipes :)';
+  _errorMessage = 'No bookmarks yet. Find a nice recipe and bookmark it ;)';
   _message = '';
 
-  /**
-   * Registers a handler function to run when the page loads
-   * Typically used to render bookmarks on initial load
-   */
   addHandlerRender(handler) {
     window.addEventListener('load', handler);
   }
 
-  /**
-   * Generates HTML markup for the list of bookmarks
-   * Uses previewView to render each item
-   */
   _generateMarkup() {
     return this._data
       .map(bookmark => previewView.render(bookmark, false))
